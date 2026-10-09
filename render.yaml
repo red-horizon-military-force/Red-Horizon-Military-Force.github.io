@@ -1,0 +1,16 @@
+# Render -> New -> Blueprint -> choose this GitHub repository.
+# No npm libraries, databases or manual environment variables required.
+services:
+  - type: web
+    name: red-horizon-military-force
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22.22.0"
+      - key: NODE_ENV
+        value: production
