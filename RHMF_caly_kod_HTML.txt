@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Red Horizon Military Force</title>
+<meta name="description" content="Red Horizon Military Force: a BRM5 milsim and gaming community. Discover our regiments, rank system, operations, training pathway and recruitment.">
+<meta name="theme-color" content="#050609">
+<style>
+:root {
+  --red:#b51f24;
+  --red2:#e02b31;
+  --black:#050609;
+  --panel:rgba(7,9,13,.82);
+  --line:rgba(210,210,210,.13);
+  --text:#e8e8e8;
+  --muted:#89909a;
+  --green:#71d6a0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:#030407;color:var(--text);overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:20;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 4px);
+  mix-blend-mode:screen;opacity:.28;
+}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:19;
+  box-shadow:inset 0 0 180px #000;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:15;height:76px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;background:rgba(3,4,7,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:13px;font-weight:900;letter-spacing:2px}
+.brand-mark{width:42px;height:42px;border:2px solid var(--red);display:grid;place-items:center;
+  color:var(--red);font-weight:1000;transform:skew(-7deg);}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:3px;margin-top:2px}
+.navlinks{display:flex;gap:28px;font-size:12px;font-weight:800;letter-spacing:1.5px}
+.navlinks a{color:#c9ccd0;position:relative}
+.navlinks a:after{content:"";position:absolute;left:0;bottom:-9px;width:0;height:2px;background:var(--red);transition:.25s}
+.navlinks a:hover:after{width:100%}
+.hero{
+  min-height:100vh;position:relative;display:flex;align-items:center;
+  padding:120px 8vw 80px;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(3,4,7,.97) 0%,rgba(3,4,7,.78) 42%,rgba(3,4,7,.34) 100%),
+    linear-gradient(0deg,#030407 0%,transparent 35%),
+    url("data:image/webp;base64,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") center/cover no-repeat;
+}
+.hero-grid{
+  position:absolute;inset:0;opacity:.12;
+  background-image:linear-gradient(rgba(255,255,255,.25) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.25) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:linear-gradient(90deg,black,transparent 75%);
+}
+.hero-content{position:relative;z-index:2;max-width:850px}
+.eyebrow{font-size:11px;letter-spacing:4px;color:var(--red2);font-weight:900;margin-bottom:18px}
+h1{font-size:clamp(52px,8vw,110px);line-height:.86;letter-spacing:-4px;text-transform:uppercase;
+  text-shadow:8px 8px 0 rgba(181,31,36,.12)}
+h1 span{color:var(--red)}
+.tagline{margin-top:25px;font-size:clamp(18px,2vw,27px);letter-spacing:5px;font-weight:800}
+.hero p{max-width:670px;margin-top:18px;color:#aeb3ba;line-height:1.7}
+.actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
+.btn{padding:15px 23px;border:1px solid var(--red);background:var(--red);font-weight:900;
+  letter-spacing:1.5px;text-transform:uppercase;font-size:12px;cursor:pointer;transition:.2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.15)}
+.btn.alt{background:transparent;border-color:rgba(255,255,255,.25)}
+.status{margin-top:30px;display:flex;gap:22px;align-items:center;color:#8e949d;font-size:10px;letter-spacing:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.section{padding:105px 8vw;position:relative}
+.section.dark{background:#05060a}
+.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:45px}
+.kicker{color:var(--red2);font-size:10px;letter-spacing:4px;font-weight:900;margin-bottom:10px}
+h2{font-size:clamp(32px,5vw,58px);text-transform:uppercase;letter-spacing:-2px}
+.section-head p{max-width:520px;color:#858c95;line-height:1.7}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);padding:25px;position:relative;overflow:hidden}
+.card:before{content:"";position:absolute;left:0;top:0;width:3px;height:100%;background:var(--red)}
+.card .num{font-size:11px;color:var(--red2);letter-spacing:2px;font-weight:900}
+.card h3{margin:12px 0 8px;font-size:18px;text-transform:uppercase}
+.card p{color:#858c95;font-size:13px;line-height:1.6}
+.rank-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.regiment-list{display:grid;gap:10px}
+.regiment{background:var(--panel);border:1px solid var(--line);overflow:hidden}
+.regiment summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:90px 1fr 45px;align-items:center;gap:20px;padding:22px 25px}
+.regiment summary::-webkit-details-marker{display:none}
+.regiment summary:hover{background:rgba(181,31,36,.06)}
+.reg-code{font-size:12px;letter-spacing:2px;color:var(--red2);font-weight:900}
+.regiment summary strong{display:block;font-size:18px;text-transform:uppercase}
+.regiment summary small{display:block;color:#777f89;font-size:11px;letter-spacing:.7px;margin-top:5px}
+.expand{font-size:25px;color:var(--red2);text-align:center;transition:.2s}
+.regiment[open] .expand{transform:rotate(45deg)}
+.regiment-body{padding:0 25px 25px 135px;color:#8d949d;line-height:1.7;font-size:13px;border-top:1px solid rgba(255,255,255,.06)}
+.regiment-body p{padding-top:20px;max-width:850px}
+.specs{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.specs span{border:1px solid var(--line);padding:7px 9px;font-size:9px;letter-spacing:1.3px;color:#aeb3ba}
+.rank{min-height:72px}
+.rank span{font-size:8px;line-height:1.4}
+
+.rank{padding:15px;background:#080a0f;border:1px solid var(--line);font-size:11px;letter-spacing:1px;font-weight:800}
+.rank span{display:block;color:var(--red2);font-size:9px;margin-bottom:5px}
+.recruit{
+  padding:90px 8vw;background:
+  linear-gradient(90deg,rgba(6,7,10,.95),rgba(6,7,10,.82)),
+  url("data:image/webp;base64,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") center/cover fixed;
+}
+.recruit-box{max-width:1050px;margin:auto;border:1px solid rgba(181,31,36,.55);background:rgba(3,4,7,.78);
+  padding:45px;position:relative}
+.recruit-box:before,.recruit-box:after{content:"";position:absolute;width:35px;height:35px;border-color:var(--red);border-style:solid}
+.recruit-box:before{left:-1px;top:-1px;border-width:2px 0 0 2px}
+.recruit-box:after{right:-1px;bottom:-1px;border-width:0 2px 2px 0}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+input,select,textarea{width:100%;background:#07090d;color:white;border:1px solid var(--line);padding:15px;outline:none}
+textarea{min-height:130px;resize:vertical;grid-column:1/-1}
+input:focus,select:focus,textarea:focus{border-color:var(--red)}
+.form .full{grid-column:1/-1}
+.coming{display:flex;align-items:center;justify-content:center;min-height:260px;border:1px dashed rgba(181,31,36,.45);
+  background:linear-gradient(135deg,rgba(181,31,36,.04),transparent)}
+.coming strong{font-size:clamp(30px,5vw,65px);letter-spacing:7px;color:#c3c6ca}
+.footer{padding:35px 8vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;
+  color:#666d76;font-size:10px;letter-spacing:2px}
+@media(max-width:900px){
+  .navlinks{display:none} .grid4{grid-template-columns:1fr 1fr} .rank-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .hero{padding:120px 6vw 70px} .section,.recruit{padding:75px 6vw}
+  .grid4,.rank-grid,.form{grid-template-columns:1fr}  .regiment summary{grid-template-columns:65px 1fr 30px;gap:10px;padding:18px}
+  .regiment-body{padding:0 18px 20px}
+ .form .full,textarea{grid-column:auto}
+  .recruit-box{padding:25px} h1{letter-spacing:-2px} .footer{flex-direction:column;gap:12px}
+}
+
+/* RHMF Command Portal — expanded UI */
+.extra-panel{border:1px solid var(--line);background:rgba(13,16,22,.9);padding:28px;transition:border-color .2s,transform .2s}
+.extra-panel:hover{border-color:rgba(224,43,49,.55);transform:translateY(-3px)}
+.extra-panel .num{margin-bottom:16px}
+.extra-panel h3{font-size:19px;margin-bottom:12px;text-transform:uppercase}
+.extra-panel p{color:#a5abb4;line-height:1.8;font-size:14px}
+.skip-link:focus{position:fixed!important;left:16px!important;top:84px!important;z-index:40;background:#b51f24;padding:14px;color:white}
+
+:root {color-scheme:dark}
+html {scroll-padding-top:88px}
+body {font-size:15px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible {outline:2px solid #ff7175;outline-offset:4px}
+::selection{background:#b51f24;color:white}
+.section{isolation:isolate}.section-head{align-items:end}
+.section-head p{font-size:14px}.section-head h2{line-height:1.04}
+.card,.extra-panel,.rank,.regiment,.mission-card,.intel-card,.metric,.faq-list details{transition:border-color .2s,transform .2s,background .2s}
+.card:hover,.rank:hover,.mission-card:hover,.intel-card:hover,.metric:hover{border-color:rgba(224,43,49,.48)}
+.card p{font-size:14px}.regiment summary{min-height:87px}
+.regiment-body{font-size:14px}.regiment-body p{max-width:920px}
+.nav{gap:20px}.navlinks{align-items:center;gap:clamp(12px,1.65vw,26px)}
+.navlinks a{font-size:11px;white-space:nowrap}.navlinks a.current{color:#fff}
+.navlinks a.current:after{width:100%}.nav-cta{padding:10px 14px!important;background:#b51f24;color:white!important;border:1px solid #b51f24}
+.nav-cta:after{display:none}.menu-toggle{display:none;background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 13px;cursor:pointer;font-size:12px;font-weight:800;letter-spacing:1px}
+.hero{min-height:min(900px,100svh);padding-top:130px}.hero-content{max-width:900px}.hero p{font-size:16px;max-width:650px}
+.hero-stamp{display:inline-flex;gap:12px;align-items:center;padding:10px 13px;border:1px solid rgba(224,43,49,.4);background:rgba(0,0,0,.45);margin-bottom:22px;color:#e5e7e9;font-size:10px;letter-spacing:2px;font-weight:850}
+.hero-stamp .live-square{height:8px;width:8px;background:#d82d33;box-shadow:0 0 13px rgba(224,43,49,.6)}
+.hero-accent{height:2px;width:72px;background:#e02b31;margin-top:23px}.status{gap:16px;flex-wrap:wrap;letter-spacing:1px}.dot{background:#71d6a0}
+.hero-bar{position:absolute;bottom:0;left:0;right:0;z-index:2;background:rgba(3,4,7,.75);border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;padding:17px 8vw;gap:15px;color:#89909a;font-size:10px;letter-spacing:1.8px}
+.hero-bar strong{color:#d3d5da;font-weight:800}
+.section-topline{margin-bottom:32px;color:#737b86;font-size:12px;letter-spacing:1.8px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.feature-strip{margin-top:30px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;color:#a8adb5;font-size:12px}
+.feature-strip span{border:1px solid var(--line);background:#0a0d12;padding:10px 13px;letter-spacing:1px}
+.num{font-weight:900;color:var(--red2);font-size:11px;letter-spacing:2px}
+.story-copy{color:#a7adb5;max-width:890px;line-height:1.85;margin:28px 0 0;font-size:15px}
+.regiment-body .regiment-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:19px;max-width:880px}
+.regiment-detail-grid strong{color:#eee;font-size:12px;text-transform:uppercase;letter-spacing:1px}
+.regiment-detail-grid p{padding-top:6px}
+.rank-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.rank{min-height:83px;font-size:12px;line-height:1.4}.rank span{font-size:9px}
+.command-card{display:grid;grid-template-columns:minmax(230px,.6fr) 1.4fr;gap:30px;align-items:center;margin-top:24px;padding:30px;border:1px solid rgba(181,31,36,.4);background:linear-gradient(115deg,rgba(181,31,36,.09),rgba(7,9,13,.86))}
+.command-emblem{width:100%;height:148px;border:1px solid rgba(181,31,36,.35);display:grid;place-content:center;text-align:center;background:radial-gradient(circle at center,rgba(181,31,36,.16),transparent 70%)}
+.command-emblem strong{font-size:43px;letter-spacing:6px;color:var(--red2)}.command-emblem span{font-size:10px;letter-spacing:3px;color:#a9adb5}
+.command-card h3{font-size:25px;margin:9px 0 10px}.command-card p{line-height:1.8;color:#a4aab3;font-size:14px}
+.mini-note{border-left:3px solid #b51f24;padding:13px 18px;background:rgba(181,31,36,.07);color:#aeb4bc;font-size:13px;line-height:1.7;margin-top:22px}
+.extra-intro{font-size:15px}.extra-step{align-items:center}.extra-step strong{line-height:1.5}
+.ops-toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin:-12px 0 22px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap}.filter{padding:10px 14px;border:1px solid var(--line);color:#b7bec8;background:#090b10;cursor:pointer;font-size:11px;font-weight:800;letter-spacing:1px}
+.filter[aria-pressed="true"]{border-color:var(--red);background:rgba(181,31,36,.2);color:#fff}
+.ops-caption{font-size:11px;color:#8d949d;letter-spacing:1px}
+.mission-card{border:1px solid var(--line);padding:24px;background:linear-gradient(135deg,#101218,#07090d);display:flex;flex-direction:column;gap:15px;min-height:285px}
+.mission-card[hidden]{display:none!important}.mission-card h3{font-size:23px;text-transform:uppercase;letter-spacing:-.3px}
+.mission-card p{font-size:14px;line-height:1.75;color:#a4abb5;flex:1}
+.mission-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.pill{display:inline-flex;padding:6px 8px;color:#d6d9de;font-size:9px;letter-spacing:1.2px;font-weight:900;border:1px solid #434b57;text-transform:uppercase}
+.mission-footer{border-top:1px solid var(--line);padding-top:12px;font-size:10px;letter-spacing:1px;color:#8d949d}
+.training-intro{line-height:1.8;color:#abb0b8;margin-bottom:22px;max-width:800px}
+.training-block{display:grid;grid-template-columns:64px 1fr;gap:22px;align-items:start;background:#0a0c10;border:1px solid var(--line);padding:23px;margin-bottom:10px}
+.training-index{border:1px solid var(--red);color:#f4e6e7;display:grid;place-items:center;font-size:20px;font-weight:900;height:54px}
+.training-block h3{font-size:18px;margin:2px 0 6px}.training-block p{line-height:1.65;color:#a6acb5;font-size:14px}
+.training-block small{display:block;margin-top:12px;color:#d8585c;font-size:10px;letter-spacing:1.2px;font-weight:900}
+.intel-card{padding:25px;border:1px solid var(--line);background:#0a0d12;min-height:180px}
+.intel-card h3{font-size:17px;text-transform:uppercase;margin:13px 0 12px}.intel-card p{font-size:14px;color:#a6adb6;line-height:1.75}
+.intel-blank{border:1px dashed rgba(224,43,49,.4);padding:30px;display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(95deg,rgba(224,43,49,.06),#07080d);margin-bottom:20px}
+.intel-blank strong{font-size:20px;letter-spacing:2px}.intel-blank p{max-width:540px;line-height:1.7;color:#aab0ba;font-size:13px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.metric{border:1px solid var(--line);padding:29px;background:#080a0f}
+.metric .value{font-size:clamp(27px,3vw,40px);color:#e6e7e8;font-weight:900;letter-spacing:-1px;margin:10px 0}
+.metric p{font-size:13px;color:#9ba3ad;line-height:1.6}.metric-label{font-size:10px;letter-spacing:2px;color:#d84c50;font-weight:900}
+.faq-list{display:grid;gap:10px}.faq-list details{background:#0a0d12;border:1px solid var(--line);padding:20px 24px}
+.faq-list details[open]{border-color:rgba(181,31,36,.55)}.faq-list summary{cursor:pointer;font-weight:800;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:'+';font-size:24px;color:var(--red2)}.faq-list details[open] summary::after{content:'−'}
+.faq-list p{line-height:1.8;color:#a7adb7;font-size:14px;margin-top:12px;max-width:850px}
+.recruit{background-attachment:scroll}.recruit-box{max-width:1120px}
+.recruit-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;margin-top:22px}.recruit .form{margin-top:0}
+.recruit label{display:block;font-weight:800;color:#bdc3cc;letter-spacing:1px;font-size:10px;margin-bottom:8px;text-transform:uppercase}
+.recruit .field{min-width:0}.recruit .field.full{grid-column:1/-1}.recruit input,.recruit select,.recruit textarea{font-size:14px;padding:13px}
+.recruit textarea{min-height:112px;grid-column:auto}.form .full{grid-column:1/-1}
+.recruit-aside{padding:25px;border:1px solid var(--line);background:rgba(10,12,18,.75)}
+.recruit-aside h3{font-size:21px;text-transform:uppercase;margin:14px 0}.recruit-aside p{line-height:1.7;color:#aab0b9;font-size:13px}
+.step-list{list-style:none;counter-reset:recruit;display:grid;gap:18px;margin:22px 0}
+.step-list li{display:grid;grid-template-columns:35px 1fr;gap:11px;align-items:start;color:#b4bac3;font-size:13px;line-height:1.6}
+.step-list li:before{counter-increment:recruit;content:counter(recruit, decimal-leading-zero);font-weight:900;color:var(--red2)}
+.subtle{font-size:12px;color:#949ca7;line-height:1.7}.small-link{border-bottom:1px solid var(--red);color:#eee}
+#application-result{display:none;margin-top:24px;padding:22px;border:1px solid rgba(181,31,36,.6);background:#080a0f}
+#application-result.visible{display:block}#application-result h3{margin-bottom:8px}.application-preview{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.65;padding:15px;background:#030407;border:1px solid var(--line);color:#c9cdd2;max-height:350px;overflow:auto;margin:12px 0}
+.result-actions{display:flex;gap:9px;flex-wrap:wrap}.result-actions .btn{font-size:11px;padding:12px 14px}.form-error{color:#ff8588;font-size:13px;min-height:1em;margin-top:8px}
+.notice-label{font-size:10px;color:#e06e72;letter-spacing:2px;font-weight:900}
+.site-note{border-top:1px solid var(--line);background:#08090c;padding:18px 8vw;color:#949ba4;font-size:12px;line-height:1.7;text-align:center}
+.footer{gap:18px;align-items:center}.footer a{color:#aaa}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer a:hover{color:#fff}
+.back-top{position:fixed;bottom:22px;right:22px;z-index:18;background:#b51f24;border:1px solid #dd3a40;color:white;padding:12px 15px;cursor:pointer;display:none;font-size:11px;letter-spacing:1px;font-weight:900}.back-top.show{display:block}
+@media(max-width:1100px){.navlinks{gap:12px}.navlinks a{font-size:10px}.nav{padding:0 3vw}}
+@media(max-width:980px){.nav{padding:0 5vw}.navlinks{display:none;position:absolute;top:76px;left:0;right:0;background:#07080c;padding:18px 6vw 24px;border-bottom:1px solid rgba(181,31,36,.45);flex-direction:column;align-items:stretch;gap:0;max-height:calc(100svh - 76px);overflow:auto}.navlinks.is-open{display:flex}.navlinks a{font-size:12px;padding:14px 0;border-bottom:1px solid var(--line)}.navlinks a:after{display:none}.nav-cta{text-align:center;margin-top:12px}.menu-toggle{display:block}.grid3{grid-template-columns:1fr 1fr}.recruit-layout{grid-template-columns:1fr}.hero-bar{font-size:9px}}
+@media(max-width:750px){.section-head{display:block}.section-head p{margin-top:14px}.grid3,.grid2,.metric-grid{grid-template-columns:1fr}.command-card{grid-template-columns:1fr}.command-emblem{height:125px}.regiment-body .regiment-detail-grid{grid-template-columns:1fr;gap:4px}.hero{min-height:730px;padding-bottom:100px}.hero-bar{flex-wrap:wrap;gap:7px}.hero-bar span:last-child{display:none}.rank-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.intel-blank{display:block}.intel-blank p{margin-top:12px}}
+@media(max-width:600px){.hero{padding-top:145px}.hero-content h1{font-size:clamp(43px,12vw,78px);line-height:.94}.hero .tagline{font-size:15px;letter-spacing:3px}.hero p{font-size:14px}.status{font-size:9px}.section{padding-top:78px;padding-bottom:78px}.rank-grid{grid-template-columns:1fr 1fr}.rank{min-height:65px}.recruit .form{grid-template-columns:1fr}.recruit .field.full{grid-column:auto}.recruit-box{padding:23px}.regiment summary strong{font-size:14px}.hero-bar{padding:14px 6vw}.training-block{grid-template-columns:45px 1fr;padding:15px;gap:14px}.training-index{height:45px;font-size:16px}.footer{padding:28px 6vw}.mission-card{min-height:auto}}
+@media(max-width:380px){.brand{gap:8px;font-size:12px;letter-spacing:1px}.brand-mark{width:36px;height:36px}.hero-content h1{font-size:43px}.hero-stamp{font-size:8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Visual refresh for improved readability */
+:root{
+  --panel:rgba(14,18,24,.88);
+  --line:rgba(255,255,255,.10);
+  --text:#f2f4f7;
+  --muted:#b4bcc7;
+  --surface:#0d1117;
+  --surface2:#131922;
+  --card-bg:linear-gradient(180deg,rgba(17,22,30,.96),rgba(10,13,18,.98));
+  --soft-shadow:0 14px 34px rgba(0,0,0,.22);
+}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(224,43,49,.13), transparent 28%),
+    radial-gradient(circle at top right, rgba(255,255,255,.045), transparent 18%),
+    linear-gradient(180deg,#05070b 0%, #090d12 40%, #06090d 100%);
+  color:var(--text);
+  line-height:1.66;
+}
+body:before{opacity:.12;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 5px)}
+body:after{box-shadow:inset 0 0 140px rgba(0,0,0,.7)}
+.nav{background:rgba(7,10,14,.82);border-bottom-color:rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.section,.recruit{padding-top:90px;padding-bottom:90px}
+.section-head p,.story-copy,.training-intro,.faq-list p,.mission-card p,.intel-card p,.metric p,.command-card p,.card p,.extra-panel p,.regiment-body p,.recruit-aside p{color:#c1c8d2}
+.story-copy,.training-intro,.hero p{max-width:74ch}
+.section-head p{max-width:60ch}
+.card,.extra-panel,.rank,.regiment,.mission-card,.intel-card,.metric,.faq-list details,.training-block,.recruit-aside,.recruit-box,.command-card,#application-result{box-shadow:var(--soft-shadow)}
+.card,.extra-panel,.rank,.regiment,.mission-card,.intel-card,.metric,.faq-list details,.training-block,.recruit-aside,#application-result{border-radius:18px;background:var(--card-bg)}
+.command-card,.recruit-box{border-radius:24px;box-shadow:0 16px 40px rgba(0,0,0,.26)}
+.recruit-box{background:linear-gradient(180deg,rgba(8,11,15,.9),rgba(5,8,11,.96))}
+.btn{border-radius:999px;padding-inline:20px;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.btn.alt{background:rgba(255,255,255,.03)}
+.hero-stamp,.feature-strip span,.pill,.hero-bar,.nav-cta,.reg-code{border-radius:999px}
+.feature-strip{gap:10px}.feature-strip span{background:rgba(255,255,255,.03)}
+.hero p{color:#d1d7df}
+.hero-bar{background:rgba(8,10,14,.82);backdrop-filter:blur(10px)}
+.mini-note{border-radius:14px}
+input,select,textarea{border-radius:14px;background:rgba(255,255,255,.03);color:#eef1f4}
+input::placeholder,textarea::placeholder{color:#8f98a3}
+.recruit label{color:#d8dde5}
+#application-result{border-radius:18px}
+.footer,.site-note{color:#9ba4af}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.bot-check{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+.send-feedback{min-height:22px;color:#e0e5ed;font-size:13px;line-height:1.5}
+.send-feedback.is-error{color:#ffa6a6}
+.send-feedback.is-success{color:#9ee7be}
+button:disabled{opacity:.58;cursor:not-allowed;transform:none!important}
+/* Discord spotlight */
+.discord-feature{display:grid;grid-template-columns:minmax(280px,.92fr) 1.08fr;gap:26px;align-items:stretch}
+.discord-poster,.discord-article{border:1px solid rgba(255,255,255,.1);background:var(--card-bg);border-radius:24px;box-shadow:var(--soft-shadow)}
+.discord-poster{padding:28px;position:relative;overflow:hidden;background:
+  linear-gradient(155deg,rgba(88,101,242,.16),rgba(181,31,36,.10) 42%,rgba(12,16,23,.98) 100%);
+}
+.discord-poster:before{content:"";position:absolute;inset:auto -40px -65px auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(88,101,242,.24),transparent 70%)}
+.poster-top,.poster-eyebrow{position:relative;z-index:1;display:inline-flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);font-size:10px;letter-spacing:2px;font-weight:900;color:#e5e9ee;border-radius:999px;text-transform:uppercase}
+.poster-eyebrow{margin-top:14px;color:#cfd8ff;border-color:rgba(88,101,242,.4)}
+.discord-poster h3{position:relative;z-index:1;font-size:clamp(32px,4vw,48px);line-height:.96;letter-spacing:-1.2px;margin:24px 0 14px;max-width:9ch}
+.discord-poster p{position:relative;z-index:1;color:#d0d8e5;max-width:38ch;font-size:15px;line-height:1.8}
+.poster-tags{position:relative;z-index:1;display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.poster-tags span{padding:10px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-size:10px;letter-spacing:1.3px;font-weight:900;color:#eef2f8}
+.poster-invite{position:relative;z-index:1;margin-top:28px;padding:16px 18px;border-radius:18px;background:rgba(7,10,16,.72);border:1px solid rgba(88,101,242,.38);font-size:18px;font-weight:900;letter-spacing:.4px;color:#eef2ff}
+.discord-article{padding:30px}
+.discord-article h3{font-size:30px;line-height:1.05;margin:10px 0 16px}
+.discord-article p{color:#c4cbd5;font-size:15px;line-height:1.9;margin-bottom:14px}
+.discord-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+@media(max-width:980px){.discord-feature{grid-template-columns:1fr}.discord-poster h3{max-width:none}.hero .actions{flex-wrap:wrap}}
+@media(max-width:600px){.discord-poster,.discord-article{border-radius:20px}.discord-poster{padding:22px}.poster-invite{font-size:15px}.discord-article{padding:22px}.footer-links{gap:12px}}
+
+</style>
+</head>
+
+<body>
+<a href="#about" class="skip-link" style="position:absolute;left:-9999px;top:auto">Skip to content</a>
+<nav class="nav" aria-label="Primary navigation">
+  <a class="brand" href="#home" aria-label="Red Horizon Military Force — Home"><div class="brand-mark" aria-hidden="true">RH</div><div>RED HORIZON<small>MILITARY FORCE</small></div></a>
+  <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="navlinks" aria-expanded="false">☰ MENU</button>
+  <div class="navlinks" id="navlinks">
+    <a href="#about">ABOUT</a><a href="#units">REGIMENTS</a><a href="#ranks">RANKS</a><a href="#operations">OPERATIONS</a><a href="#training">TRAINING</a><a href="#code">CODE</a><a href="#intel">INTEL</a><a href="#discord">DISCORD</a><a href="#faq">FAQ</a><a href="#recruit" class="nav-cta">ENLIST NOW ↗</a>
+  </div>
+</nav>
+<main>
+<header class="hero" id="home">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-stamp"><span class="live-square" aria-hidden="true"></span> BRM5 COMMUNITY // MILSIM × TEAMPLAY</div>
+    <div class="eyebrow">RED HORIZON // COMMAND DOSSIER</div>
+    <h1>RED <span>HORIZON</span><br>MILITARY FORCE</h1>
+    <div class="hero-accent" aria-hidden="true"></div>
+    <div class="tagline">WE FIGHT BEYOND THE HORIZON</div>
+    <p>A place for players who want more from Blackhawk Rescue Mission 5: coordinated missions, meaningful progression and a community worth coming back to. Serious when the operation starts. Welcoming when the mission ends.</p>
+    <div class="actions"><a class="btn" href="#recruit">BECOME A RECRUIT →</a><a class="btn alt" href="https://discord.gg/nuJADnwtdk" target="_blank" rel="noopener noreferrer">JOIN DISCORD ↗</a></div>
+    <div class="status"><span><i class="dot" style="display:inline-block;margin-right:9px" aria-hidden="true"></i> COMMUNITY DOSSIER AVAILABLE</span><span>THEATER: BLACKHAWK RESCUE MISSION 5</span></div>
+  </div>
+  <div class="hero-bar"><span><strong>RHMF //</strong> THE NEXT CHAPTER IS YOURS</span><span>4 REGIMENTS • ONE FORCE</span><span>SCROLL TO DISCOVER ↓</span></div>
+</header>
+<section class="section" id="about">
+  <div class="section-head"><div><div class="kicker">01 // WHO WE ARE</div><h2>Our Force</h2></div><p>One identity. Different specialties. A shared commitment to an enjoyable, organized BRM5 experience.</p></div>
+  <div class="grid4">
+    <article class="card"><div class="num">CORE 01</div><h3>Discipline</h3><p>We value preparation, reliability and clear roles during organized events—not unnecessary pressure outside them.</p></article>
+    <article class="card"><div class="num">CORE 02</div><h3>Brotherhood</h3><p>We help new members find their footing and give experienced operators a place to build lasting friendships.</p></article>
+    <article class="card"><div class="num">CORE 03</div><h3>Readiness</h3><p>Practice, communication and shared goals turn separate players into a confident team in-game.</p></article>
+    <article class="card"><div class="num">CORE 04</div><h3>Respect</h3><p>Skill earns recognition; attitude earns trust. Fair play and mutual respect come first.</p></article>
+  </div>
+  <p class="story-copy"><strong style="color:#f4f4f4">Our identity.</strong> Red Horizon Military Force is a fictional military-inspired community centered on Roblox's Blackhawk Rescue Mission 5. We combine the structure of MILSIM—regiments, ranks, training and organized scenarios—with the energy of a social gaming group. Whether you enjoy ground operations, aviation, support duties or simply joining a good team, RHMF is designed around finding your role and growing into it.</p>
+  <div class="feature-strip"><span>STRUCTURED MILSIM EVENTS</span><span>CASUAL COMMUNITY SESSIONS</span><span>ROLE-BASED REGIMENTS</span><span>MEMBER DEVELOPMENT</span></div>
+</section>
+<section class="section dark" id="units">
+  <div class="section-head"><div><div class="kicker">02 // ORDER OF BATTLE</div><h2>Four Regiments.<br>One Horizon.</h2></div><p>Discover the roles within RHMF. Open a regiment dossier to see its identity, focus and what kind of player might enjoy it.</p></div>
+  <div class="regiment-list">
+    <details class="regiment" open><summary><span class="reg-code">48TH</span><span><strong>Ranger Regiment</strong><small>Reconnaissance &amp; ground team operations</small></span><span class="expand" aria-hidden="true">+</span></summary><div class="regiment-body"><p>When a team needs information, confidence and steady decision-making, Rangers lead the way. The 48th Ranger Regiment focuses on reconnaissance-themed BRM5 scenarios, squad coordination, route observation and objective-based ground gameplay. Its members learn to work as a reliable unit rather than as disconnected individuals.</p><div class="regiment-detail-grid"><div><strong>What you can expect</strong><p>Ground-focused events, teamwork exercises, scouting scenarios and cooperation with airborne and support elements.</p></div><div><strong>Who fits the regiment</strong><p>Players who enjoy planning, clear callouts, patience and taking responsibility for their teammates.</p></div></div><div class="specs"><span>GROUND OPERATIONS</span><span>RECONNAISSANCE</span><span>SQUAD TEAMWORK</span></div></div></details>
+    <details class="regiment"><summary><span class="reg-code">78TH</span><span><strong>Paratroopers Regiment</strong><small>Rapid deployment &amp; insertion-themed gameplay</small></span><span class="expand" aria-hidden="true">+</span></summary><div class="regiment-body"><p>The 78th Paratroopers Regiment brings momentum to coordinated events. Its identity is built around deploying together, responding to changing in-game objectives and staying organized during large group sessions. The regiment operates alongside aviation elements in scenarios featuring BRM5 helicopters such as the CH-47 Chinook, Little Bird and UH-60 Black Hawk.</p><div class="regiment-detail-grid"><div><strong>What you can expect</strong><p>Team deployments, timed event objectives, air-to-ground coordination and organized squad play.</p></div><div><strong>Who fits the regiment</strong><p>Players who love fast-paced game events, adaptability and close cooperation with teammates.</p></div></div><div class="specs"><span>RAPID DEPLOYMENT</span><span>HELICOPTER SUPPORT</span><span>TEAM OBJECTIVES</span></div></div></details>
+    <details class="regiment"><summary><span class="reg-code">12TH</span><span><strong>Airborne Regiment</strong><small>Aviation &amp; air mobility</small></span><span class="expand" aria-hidden="true">+</span></summary><div class="regiment-body"><p>For those who find their home in the skies, the 12th Airborne Regiment represents the aviation-focused side of RHMF. Pilots and crew-minded players contribute to helicopter transport, event coordination and movement of players between in-game locations. Its fictional fleet features Chinooks, Little Birds and Black Hawks.</p><div class="regiment-detail-grid"><div><strong>What you can expect</strong><p>Flight-themed community activities, crew communication, transport scenarios and support for ground regiments.</p></div><div><strong>Who fits the regiment</strong><p>Players interested in aircraft, cooperative flying and keeping a larger in-game operation connected.</p></div></div><div class="specs"><span>AVIATION</span><span>AIR MOBILITY</span><span>CREW COORDINATION</span></div></div></details>
+    <details class="regiment"><summary><span class="reg-code">58TH</span><span><strong>Support Regiment</strong><small>Logistics, communication &amp; community support</small></span><span class="expand" aria-hidden="true">+</span></summary><div class="regiment-body"><p>Behind every well-run event is a team that makes the experience better for everyone. The 58th Support Regiment emphasizes logistics-themed activities, transporting teammates, helping new members and assisting with the coordination of operations. The regiment's value comes from dependability and service to the community.</p><div class="regiment-detail-grid"><div><strong>What you can expect</strong><p>Event support, logistics-themed scenarios, onboarding assistance and coordination across regiments.</p></div><div><strong>Who fits the regiment</strong><p>Players who are organized, patient, helpful and motivated by the success of the whole group.</p></div></div><div class="specs"><span>LOGISTICS</span><span>COMMUNICATION</span><span>COMMUNITY SUPPORT</span></div></div></details>
+  </div>
+  <div class="mini-note"><strong>Regiment assignment:</strong> Preferences can be expressed during recruitment. Final placement, qualifications and any availability requirements should be confirmed by RHMF staff; these descriptions are an introduction, not an official assignment guarantee.</div>
+</section>
+<section class="section" id="ranks">
+  <div class="section-head"><div><div class="kicker">03 // CHAIN OF COMMAND</div><h2>Rank &amp; Leadership</h2></div><p>A clear structure makes organized play easier. In RHMF, rank is a sign of trust and responsibility—not a reason to disrespect others.</p></div>
+  <div class="rank-grid">
+    <div class="rank"><span>OFFICER</span>COLONEL</div><div class="rank"><span>OFFICER</span>LIEUTENANT COLONEL</div><div class="rank"><span>OFFICER</span>MAJOR</div><div class="rank"><span>OFFICER</span>CAPTAIN</div>
+    <div class="rank"><span>OFFICER</span>LIEUTENANT</div><div class="rank"><span>SUPERVISOR</span>MASTER SERGEANT</div><div class="rank"><span>SUPERVISOR</span>STAFF SERGEANT</div><div class="rank"><span>SUPERVISOR</span>SERGEANT</div>
+    <div class="rank"><span>SUPERVISOR</span>CORPORAL</div><div class="rank"><span>ENLISTED</span>SPECIALIST</div><div class="rank"><span>ENLISTED</span>PRIVATE FIRST CLASS</div><div class="rank"><span>ENLISTED</span>PRIVATE</div>
+  </div>
+  <div class="command-card"><div class="command-emblem" aria-label="RHMF command insignia"><strong>RH</strong><span>COMMAND DIVISION</span></div><div><div class="num">COMMANDING OFFICER</div><h3>Colonel Huzzy</h3><p>Colonel Huzzy is identified in the RHMF dossier as the commanding officer. The command role represents the overall direction of the organization, coordination with regiment leaders and stewardship of its community culture.</p><p style="margin-top:9px">Officers guide events, NCOs mentor members and enlisted personnel form the foundation of the force. Advancement should reflect reliability, contribution, leadership and respect—not simply time online.</p></div></div>
+  <div class="mini-note"><strong>Promotion note:</strong> The rank list preserves the existing RHMF structure. Exact promotion requirements, staff vacancies and approval processes are determined by actual group leadership, not this website.</div>
+</section>
+<section class="section dark" id="identity">
+  <div class="section-head"><div><div class="kicker">04 // OUR PHILOSOPHY</div><h2>More Than a Unit</h2></div><p>We build an experience where organized MILSIM and relaxed community play can coexist.</p></div>
+  <div class="grid3">
+    <article class="extra-panel"><div class="num">THE MISSION</div><h3>Play With Purpose</h3><p>Turn ordinary BRM5 sessions into shared experiences through objectives, coordination and stories members create together.</p></article>
+    <article class="extra-panel"><div class="num">THE PEOPLE</div><h3>Belong to a Team</h3><p>New to the game? There is room to learn. Been playing for years? There is room to contribute. Everyone starts by showing respect.</p></article>
+    <article class="extra-panel"><div class="num">THE BALANCE</div><h3>Structure Without Ego</h3><p>During events, clear expectations keep the group moving. Outside events, friendly conversation and casual gaming keep the community enjoyable.</p></article>
+  </div>
+</section>
+<section class="section" id="operations">
+  <div class="section-head"><div><div class="kicker">05 // OPERATIONS LIBRARY</div><h2>Mission Concepts</h2></div><p>A glimpse of the kinds of fictional in-game scenarios a multi-regiment force can enjoy. These are illustrative concepts, not announced live events.</p></div>
+  <div class="ops-toolbar"><div class="filter-row" role="group" aria-label="Filter mission concepts"><button type="button" class="filter" data-filter="all" aria-pressed="true">ALL SCENARIOS</button><button type="button" class="filter" data-filter="ground" aria-pressed="false">GROUND</button><button type="button" class="filter" data-filter="air" aria-pressed="false">AIR</button><button type="button" class="filter" data-filter="joint" aria-pressed="false">JOINT / SUPPORT</button></div><span class="ops-caption">SCENARIO IDEAS // NOT A LIVE SCHEDULE</span></div>
+  <div class="grid3" id="missions-grid">
+    <article class="mission-card" data-category="ground"><div class="mission-head"><span class="num">CONCEPT // 01</span><span class="pill">GROUND</span></div><h3>Silent Watch</h3><p>A reconnaissance-themed event concept: small BRM5 teams work together to observe map objectives, communicate discoveries and complete a group challenge.</p><div class="mission-footer">FOCUS: RECONNAISSANCE • COMMUNICATION</div></article>
+    <article class="mission-card" data-category="air"><div class="mission-head"><span class="num">CONCEPT // 02</span><span class="pill">AIR</span></div><h3>Skybridge</h3><p>An aviation-themed session idea where air crews and passengers coordinate a series of fictional transports and timing-based team objectives.</p><div class="mission-footer">FOCUS: FLIGHT CREW • COORDINATION</div></article>
+    <article class="mission-card" data-category="joint"><div class="mission-head"><span class="num">CONCEPT // 03</span><span class="pill">JOINT</span></div><h3>Redline Response</h3><p>A multi-regiment roleplay concept combining ground teams, helicopter support and logistics in a single cooperative BRM5 challenge.</p><div class="mission-footer">FOCUS: MULTI-UNIT TEAMWORK</div></article>
+    <article class="mission-card" data-category="ground"><div class="mission-head"><span class="num">CONCEPT // 04</span><span class="pill">GROUND</span></div><h3>Checkpoint Echo</h3><p>A ground-team game night built around moving between agreed map checkpoints while maintaining clear communication and shared objectives.</p><div class="mission-footer">FOCUS: TEAM MOVEMENT • ROLEPLAY</div></article>
+    <article class="mission-card" data-category="joint"><div class="mission-head"><span class="num">CONCEPT // 05</span><span class="pill">SUPPORT</span></div><h3>Supply Line</h3><p>A logistics-themed cooperative event that highlights transport, resource planning in-game and the people who keep a large group organized.</p><div class="mission-footer">FOCUS: LOGISTICS • COOPERATION</div></article>
+    <article class="mission-card" data-category="air"><div class="mission-head"><span class="num">CONCEPT // 06</span><span class="pill">AIR</span></div><h3>Night Flight</h3><p>A relaxed aviation challenge focused on flying together, crew communication and experiencing BRM5 environments as a coordinated group.</p><div class="mission-footer">FOCUS: AIR MOBILITY • TEAMPLAY</div></article>
+  </div>
+</section>
+<section class="section dark" id="training">
+  <div class="section-head"><div><div class="kicker">06 // PERSONNEL DEVELOPMENT</div><h2>From Recruit<br>to Leader</h2></div><p>A newcomer-friendly progression concept that gives structure to learning while keeping gaming fun. Actual training procedures must be approved by RHMF leadership.</p></div>
+  <p class="training-intro">Nobody is expected to arrive as an expert. A good community helps people gain confidence through practice, constructive feedback and shared experience.</p>
+  <div class="training-block"><div class="training-index">01</div><div><h3>Orientation // First Contact</h3><p>Learn what RHMF is about, meet other members, review community rules, get comfortable with the regiment structure and ask questions.</p><small>OBJECTIVE: FIND YOUR FOOTING</small></div></div>
+  <div class="training-block"><div class="training-index">02</div><div><h3>Foundation // Team Play</h3><p>Practice voice or text callouts, basic event etiquette, teammate awareness and cooperation in beginner-friendly BRM5 sessions.</p><small>OBJECTIVE: COMMUNICATE &amp; CONTRIBUTE</small></div></div>
+  <div class="training-block"><div class="training-index">03</div><div><h3>Specialization // Regiment Experience</h3><p>Discover ground, air or support activities and develop the skills that help your preferred team during community events.</p><small>OBJECTIVE: DEVELOP YOUR ROLE</small></div></div>
+  <div class="training-block"><div class="training-index">04</div><div><h3>Responsibility // Helping Others</h3><p>Experienced, dependable members may support events, mentor recruits or be considered for leadership when opportunities exist.</p><small>OBJECTIVE: LEAD BY EXAMPLE</small></div></div>
+  <div class="mini-note"><strong>Our approach:</strong> Guided activities should be inclusive, safe and fun. Real-world tactical instruction is not part of this gaming community website.</div>
+</section>
+<section class="section" id="code">
+  <div class="section-head"><div><div class="kicker">07 // MEMBER STANDARDS</div><h2>Code of Conduct</h2></div><p>Military-inspired roleplay works best when players can trust each other. These are proposed community standards, subject to the group's official moderation policy.</p></div>
+  <div class="grid3">
+    <article class="extra-panel"><div class="num">STANDARD 01</div><h3>Respect Everyone</h3><p>Harassment, hate speech, bullying and discrimination have no place in a strong gaming community. Treat others with dignity.</p></article>
+    <article class="extra-panel"><div class="num">STANDARD 02</div><h3>Play Fair</h3><p>Follow Roblox, BRM5 and community rules. No exploits, cheating or deliberately ruining someone else's experience.</p></article>
+    <article class="extra-panel"><div class="num">STANDARD 03</div><h3>Use Clear Comms</h3><p>During organized sessions, listen to event hosts, keep communication constructive and speak up when something is unclear.</p></article>
+    <article class="extra-panel"><div class="num">STANDARD 04</div><h3>Rank Is Service</h3><p>Positions of responsibility exist to help members and coordinate play, never to intimidate or exclude others.</p></article>
+    <article class="extra-panel"><div class="num">STANDARD 05</div><h3>Protect Privacy</h3><p>Do not pressure members to reveal their real names, addresses, phone numbers or other personal details.</p></article>
+    <article class="extra-panel"><div class="num">STANDARD 06</div><h3>Keep It In-Game</h3><p>RHMF is fictional. Its ranks, equipment and operations are for gaming and roleplay—not real-world military activity.</p></article>
+  </div>
+</section>
+<section class="section dark" id="intel">
+  <div class="section-head"><div><div class="kicker">08 // COMMAND BULLETIN</div><h2>Intel &amp; Events</h2></div><p>One place for the future event calendar, community briefings and official announcements—without inventing dates or activity.</p></div>
+  <div class="intel-blank"><div><div class="notice-label">OFFICIAL BULLETIN // NOT YET CONNECTED</div><strong>AWAITING VERIFIED UPDATES</strong></div><p>Official announcements and event dates will appear here when an RHMF administrator provides them. Check your group's official channels for the current schedule.</p></div>
+  <div class="grid3">
+    <article class="intel-card"><div class="num">FUTURE FEED 01</div><h3>Community Operations</h3><p>Publish real session dates, time zones, organizing regiments and joining instructions after staff approval.</p></article>
+    <article class="intel-card"><div class="num">FUTURE FEED 02</div><h3>Training Briefings</h3><p>Share orientation sessions, approved regiment activities and other confirmed learning opportunities.</p></article>
+    <article class="intel-card"><div class="num">FUTURE FEED 03</div><h3>Command Updates</h3><p>Post verified announcements about policy, recruitment, community projects or changes in leadership.</p></article>
+  </div>
+</section>
+<section class="section" id="discord">
+  <div class="section-head"><div><div class="kicker">09 // COMMUNITY HUB</div><h2>Discord Dispatch</h2></div><p>The website is the dossier. Discord is the live command room where the RHMF community actually comes together.</p></div>
+  <div class="discord-feature">
+    <article class="discord-poster" aria-label="Red Horizon Military Force Discord spotlight">
+      <div class="poster-top">RHMF // COMMUNITY SIGNAL</div>
+      <div class="poster-eyebrow">LIVE CHANNEL ACCESS</div>
+      <h3>JOIN THE OFFICIAL DISCORD</h3>
+      <p>Announcements. Recruitment. Event coordination. Member chat. Everything that turns a roster into a real community.</p>
+      <div class="poster-tags"><span>OPERATIONS</span><span>EVENTS</span><span>RECRUITMENT</span><span>COMMUNITY</span></div>
+      <div class="poster-invite">discord.gg/nuJADnwtdk</div>
+    </article>
+    <article class="discord-article">
+      <div class="num">COMMUNITY ARTICLE 01</div>
+      <h3>The Briefing Room Is Open</h3>
+      <p>Every strong gaming group needs a place where people can meet between missions, ask questions, watch announcements and feel the pulse of the community. For RHMF, that place is Discord. It is where new recruits can get oriented, where returning members can see what is happening next, and where organized operations can take shape without losing the social side of the force.</p>
+      <p>This fits the hybrid identity of RHMF perfectly. The atmosphere can stay relaxed while people talk, share ideas and hang out—then become focused and coordinated when an operation begins. That balance is what makes the server more than just a link. It becomes the everyday headquarters of the force.</p>
+      <div class="feature-strip"><span>ANNOUNCEMENTS & UPDATES</span><span>MEMBER INTRODUCTIONS</span><span>EVENT CALL-UPS</span><span>RECRUITMENT FLOW</span></div>
+      <div class="discord-actions"><a class="btn" href="https://discord.gg/nuJADnwtdk" target="_blank" rel="noopener noreferrer">JOIN DISCORD ↗</a><a class="btn alt" href="#recruit">BUILD YOUR APPLICATION</a></div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="stats">
+  <div class="section-head"><div><div class="kicker">09 // FORCE OVERVIEW</div><h2>Community Metrics</h2></div><p>When connected to an approved source, this section can show real community activity. Until then, unverified numbers stay unpublished.</p></div>
+  <div class="metric-grid"><div class="metric"><div class="metric-label">VERIFIED MEMBERS</div><div class="value">—</div><p>Awaiting official roster integration.</p></div><div class="metric"><div class="metric-label">UPCOMING EVENTS</div><div class="value">—</div><p>Awaiting confirmed event schedule.</p></div><div class="metric"><div class="metric-label">COMPLETED SESSIONS</div><div class="value">—</div><p>Awaiting verified event history.</p></div></div>
+  <div class="mini-note">This page currently works as a self-contained static website. Live statistics, applications, a Discord feed and scheduling require an authorized integration or administrator updates.</div>
+</section>
+<section class="section dark" id="faq">
+  <div class="section-head"><div><div class="kicker">11 // INFORMATION DESK</div><h2>Frequently Asked</h2></div><p>Useful answers for potential recruits and new community members.</p></div>
+  <div class="faq-list">
+    <details><summary>What is Red Horizon Military Force?</summary><p>RHMF is a fictional military-inspired community for players of Blackhawk Rescue Mission 5 on Roblox. The experience combines organized MILSIM-style events and a more relaxed gaming community.</p></details>
+    <details><summary>Do I need experience to join?</summary><p>New players are welcome in the proposed recruitment approach. You can indicate your level of BRM5 experience during registration. Any official entry criteria should be confirmed by the group's leadership.</p></details>
+    <details><summary>Do I have to be serious all the time?</summary><p>No. The goal of a hybrid group is to be coordinated during organized sessions while maintaining a friendly, enjoyable environment between events.</p></details>
+    <details><summary>Can I choose a regiment?</summary><p>You can list your preferred regiment on the application draft. Placement depends on official recruitment procedures and the team's needs.</p></details>
+    <details><summary>How can I earn a higher rank?</summary><p>The leadership philosophy emphasizes contribution, reliability, teamwork and the ability to help others. Exact requirements are set by RHMF staff, not automatically by this page.</p></details>
+    <details><summary>Where can I find event times and the Discord invite?</summary><p>You can join the official RHMF Discord through the community section on this page or by using the direct invite button. Event times, announcements and coordination can be shared there first and later mirrored to the website if desired.</p></details>
+  </div>
+</section>
+<section class="recruit" id="recruit">
+  <div class="recruit-box">
+    <div class="kicker">12 // PERSONNEL DIVISION</div><h2>Your Horizon<br>Starts Here.</h2>
+    <p class="extra-intro" style="margin:18px 0 0">Want to play with a team, learn new roles and help shape a community? Join the RHMF Discord, then complete the application below. When you submit, the recruitment details are securely forwarded to the RHMF recruitment Discord webhook through the website server.</p>
+    <div class="recruit-layout">
+      <div>
+        <form class="form" id="recruit-form">
+          <div class="field"><label for="callsign">Roblox username / callsign *</label><input id="callsign" name="callsign" maxlength="50" required autocomplete="off" placeholder="Your in-game name"></div>
+          <div class="field"><label for="discord-handle">Discord handle (optional)</label><input id="discord-handle" name="discord" maxlength="60" autocomplete="off" placeholder="Your Discord handle"></div>
+          <div class="field"><label for="regiment">Preferred regiment *</label><select id="regiment" name="regiment" required><option value="">Select a regiment</option><option>48th Ranger Regiment</option><option>78th Paratroopers Regiment</option><option>12th Airborne Regiment</option><option>58th Support Regiment</option><option>Undecided / Open to suggestions</option></select></div>
+          <div class="field"><label for="experience">BRM5 experience *</label><select id="experience" name="experience" required><option value="">Select your experience</option><option>New player</option><option>Some experience</option><option>Experienced player</option></select></div>
+          <div class="field full"><label for="motivation">Why do you want to join? *</label><textarea id="motivation" name="motivation" maxlength="1200" required placeholder="Tell us a little about your interests, playstyle, and what you hope to bring to RHMF..."></textarea></div>
+          <div class="field full"><label for="availability">Usual play time (optional)</label><input id="availability" name="availability" maxlength="100" placeholder="e.g. weekends, evenings — include your time zone"></div>
+          <div class="bot-check" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+          <button id="submit-application" type="submit" class="btn full">SEND APPLICATION TO DISCORD →</button>
+          <p id="form-feedback" class="full send-feedback" role="status" aria-live="polite"></p>
+          <p class="full subtle">* Required fields. Do not include passwords, addresses, your age or other sensitive details. Submitting sends these details to the RHMF recruitment team on Discord. No passwords, real-world addresses, or other private information.</p>
+        </form>
+        <div id="application-result" aria-live="polite" role="status"><div id="application-status" class="num">APPLICATION STATUS</div><h3 id="application-heading">Recruitment application</h3><p id="application-detail" class="subtle">Keep a copy for your records.</p><pre id="application-preview" class="application-preview"></pre><div class="result-actions"><button type="button" class="btn" id="copy-application">COPY APPLICATION</button><button type="button" class="btn alt" id="download-application">SAVE .TXT FILE</button></div><p id="copy-feedback" class="form-error" aria-live="polite"></p></div>
+      </div>
+      <aside class="recruit-aside"><div class="num">ENLISTMENT GUIDE</div><h3>How to Join</h3><p>Follow these steps to apply and connect with the RHMF community.</p><ol class="step-list"><li>Join the official RHMF Discord server and read the welcome information.</li><li>Choose the regiment that sounds most like your preferred role.</li><li>Write a short, authentic introduction in the application builder.</li><li>Submit the form to send your application to the staff recruitment webhook. You can keep a copy for yourself.</li></ol><div class="mini-note" style="margin:12px 0 0"><strong>Official Discord linked.</strong> Always use the verified invite on this page so you enter the correct RHMF community.</div><a id="discord-link" href="#recruit" class="btn alt" style="display:none;margin-top:19px;text-align:center" target="_blank" rel="noopener noreferrer">OPEN OFFICIAL DISCORD ↗</a></aside>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div><strong style="color:#cdd0d5">© 2026 RED HORIZON MILITARY FORCE</strong><div style="margin-top:8px">WE FIGHT BEYOND THE HORIZON</div></div><div class="footer-links"><a href="#about">ABOUT</a><a href="#operations">OPERATIONS</a><a href="#discord">DISCORD</a><a href="#recruit">RECRUITMENT</a></div></footer>
+<div class="site-note">An independent fan-made BRM5 / Roblox gaming community concept. RHMF is not a real-world military organization and is not presented as endorsed by Roblox or the game's developers.</div>
+<button id="back-top" class="back-top" type="button" aria-label="Back to top">↑ TOP</button>
+<script>
+'use strict';
+// Site owner: enter a verified official Discord invite URL only after approval.
+const SITE_CONFIG = { discordInvite: 'https://discord.gg/nuJADnwtdk' };
+const nav = document.querySelector('.nav');
+const toggle = document.getElementById('menu-toggle');
+const navlinks = document.getElementById('navlinks');
+const backTop = document.getElementById('back-top');
+function updateScrollState() {
+  nav.style.background = window.scrollY > 30 ? 'rgba(7,10,14,.96)' : 'rgba(7,10,14,.82)';
+  backTop.classList.toggle('show', window.scrollY > 650);
+}
+window.addEventListener('scroll', updateScrollState, {passive:true});
+updateScrollState();
+toggle.addEventListener('click', () => {
+  const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+  toggle.setAttribute('aria-expanded', String(!isOpen));
+  toggle.textContent = isOpen ? '☰ MENU' : '✕ CLOSE';
+  navlinks.classList.toggle('is-open', !isOpen);
+});
+navlinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+  toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = '☰ MENU'; navlinks.classList.remove('is-open');
+}));
+backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+const filters = [...document.querySelectorAll('[data-filter]')];
+const missionCards = [...document.querySelectorAll('.mission-card')];
+filters.forEach(button => button.addEventListener('click', () => {
+  const selected = button.dataset.filter;
+  filters.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  missionCards.forEach(card => { card.hidden = selected !== 'all' && card.dataset.category !== selected; });
+}));
+// Applications are sent to the same-origin server. Never place the Discord webhook in HTML.
+const applicationForm = document.getElementById('recruit-form');
+const previewPanel = document.getElementById('application-result');
+const previewText = document.getElementById('application-preview');
+const copyFeedback = document.getElementById('copy-feedback');
+const sendFeedback = document.getElementById('form-feedback');
+const sendButton = document.getElementById('submit-application');
+let currentApplication = '';
+applicationForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!applicationForm.reportValidity()) return;
+  const value = id => document.getElementById(id).value.trim();
+  const fields = {
+    callsign: value('callsign'),
+    discordHandle: value('discord-handle'),
+    regiment: value('regiment'),
+    experience: value('experience'),
+    availability: value('availability'),
+    motivation: value('motivation'),
+    website: value('website')
+  };
+  currentApplication = [
+    'RED HORIZON MILITARY FORCE — RECRUITMENT APPLICATION',
+    '--------------------------------------------------',
+    'Roblox username / callsign: ' + fields.callsign,
+    'Discord handle: ' + (fields.discordHandle || 'Not provided'),
+    'Preferred regiment: ' + fields.regiment,
+    'BRM5 experience: ' + fields.experience,
+    'Usual play time: ' + (fields.availability || 'Not provided'),
+    '', 'Motivation:', fields.motivation
+  ].join('\n');
+  sendFeedback.textContent = 'Sending your recruitment application…';
+  sendFeedback.className = 'full send-feedback';
+  sendButton.disabled = true;
+  sendButton.textContent = 'SENDING…';
+  let success = false;
+  let message = 'Could not send. Please try again, or save a copy and contact staff on Discord.';
+  try {
+    const response = await fetch('/api/apply', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(fields)
+    });
+    const result = await response.json();
+    success = response.ok && result.ok === true;
+    if (success) message = 'Application successfully delivered to the recruitment channel on Discord.';
+    else if (result.error) message = result.error;
+  } catch (error) {
+    if (location.protocol === 'file:') message = 'Sending requires the website server. Start the included Node.js server and open http://localhost:3000 instead of opening index.html directly.';
+  } finally {
+    sendButton.disabled = false;
+    sendButton.textContent = 'SEND APPLICATION TO DISCORD →';
+  }
+  sendFeedback.className = 'full send-feedback ' + (success ? 'is-success' : 'is-error');
+  sendFeedback.textContent = message;
+  previewText.textContent = currentApplication;
+  previewPanel.classList.add('visible');
+  document.getElementById('application-status').textContent = success ? 'APPLICATION DELIVERED' : 'APPLICATION NOT SENT';
+  document.getElementById('application-heading').textContent = success ? 'Your application is on Discord' : 'Keep your draft and retry';
+  document.getElementById('application-detail').textContent = success
+    ? 'Your application has been forwarded to the RHMF recruitment channel. Keep a copy if you wish.'
+    : 'No Discord delivery was confirmed. You can copy or save this application and try again later.';
+  copyFeedback.textContent = '';
+  previewPanel.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('copy-application').addEventListener('click', async () => {
+  if (!currentApplication) return;
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(currentApplication);
+    else {
+      const temporary = document.createElement('textarea');
+      temporary.value = currentApplication; temporary.style.position = 'fixed'; temporary.style.opacity = '0';
+      document.body.appendChild(temporary); temporary.select();
+      if (!document.execCommand('copy')) throw new Error('Copy unavailable');
+      temporary.remove();
+    }
+    copyFeedback.textContent = 'Copied. Save the message for your records.';
+  } catch (error) { copyFeedback.textContent = 'Copy was blocked by the browser. Select the preview text manually or use Save .txt file.'; }
+});
+document.getElementById('download-application').addEventListener('click', () => {
+  if (!currentApplication) return;
+  const blob = new Blob([currentApplication],{type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob); const a = document.createElement('a');
+  a.href = url; a.download = 'RHMF_recruitment_application.txt'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  copyFeedback.textContent = 'Draft saved as a text file. This creates a local copy only.';
+});
+if (/^https:\/\/(discord\.gg|discord\.com\/invite)\/[\w-]+\/?$/i.test(SITE_CONFIG.discordInvite)) {
+  const link = document.getElementById('discord-link');
+  link.href = SITE_CONFIG.discordInvite; link.style.display = 'inline-block';
+}
+</script>
+</body>
+</html>
